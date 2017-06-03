@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         request.getSession().setAttribute("login", null);
         request.getSession().setAttribute("actor", null);
-        if(null == username || null == password){
+        if (null == username || null == password) {
             request.setAttribute("reason", "用户名或密码不能为空！");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
                 // 获取用户ID
                 request.getSession().setAttribute("userid", login.getGeneralmanagerByNumber(username).getId());
                 request.getSession().setAttribute("login", "ok");
-                request.getSession().setAttribute("actor","generalmanager");
+                request.getSession().setAttribute("actor", "generalmanager");
                 response.sendRedirect("/generalmanager/");
             } else {
                 request.setAttribute("reason", "用户名或密码不正确！");
@@ -45,8 +45,9 @@ public class LoginServlet extends HttpServlet {
             ManagerDAO login = new ManagerDAO();
             if (login.check(username, password)) {
                 request.getSession().setAttribute("userid", login.getManagerByNumber(username).getId());
+                request.getSession().setAttribute("theaterid", login.getManagerByNumber(username).getTheater_id());
                 request.getSession().setAttribute("login", "ok");
-                request.getSession().setAttribute("actor","managers");
+                request.getSession().setAttribute("actor", "managers");
                 response.sendRedirect("/managers/");
             } else {
                 request.setAttribute("reason", "用户名或密码不正确！");
@@ -58,13 +59,13 @@ public class LoginServlet extends HttpServlet {
             if (login.check(username, password)) {
                 request.getSession().setAttribute("userid", login.getEmployeeByNumber(username).getId());
                 request.getSession().setAttribute("login", "ok");
-                request.getSession().setAttribute("actor","employee");
+                request.getSession().setAttribute("actor", "employee");
                 response.sendRedirect("/employee/");
             } else {
                 request.setAttribute("reason", "用户名或密码不正确！");
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
-        }else{
+        } else {
             request.setAttribute("reason", "用户名或密码不正确！");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
