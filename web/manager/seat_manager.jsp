@@ -1,4 +1,6 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="edu.xupt.cs.se.model.Studio" %>
+<%@ page import="edu.xupt.cs.se.model.Seat" %><%--
   Created by IntelliJ IDEA.
   User: Shinelon
   Date: 2017/6/1
@@ -50,14 +52,16 @@
                 <div class="nav-container">
                     <div class="navbar-header">
                         <button class="pull-right visible-xs navbar-toggle collapsed navbar-toggle-sm" type="button"
-                                data-toggle="collapse" data-target="#king-header2-navbar-collapse"><i class="fa fa-fw fa-ellipsis-v"> </i></button>
+                                data-toggle="collapse" data-target="#king-header2-navbar-collapse"><i
+                                class="fa fa-fw fa-ellipsis-v"> </i></button>
                         <a class="navbar-brand" href="/managers/"><span style="font-size: 24px">光影人生</span>-影院票务管理系统</a>
                     </div>
                     <div class="navbar-collapse collapse" id="king-header2-navbar-collapse">
                         <ul class="nav navbar-nav navbar-left hidden-sm"></ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> admin <b class="caret"></b></a>
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i
+                                        class="fa fa-user"></i> admin <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="javascript:;"><i class="fa fa-fw fa-user"></i> 用户</a>
@@ -87,12 +91,18 @@
                                     <span class="pull-right"><i class="fa fa-angle-down"></i></span>
                                 </a>
                                 <ul class="sub-menu" style="display: block;">
-                                    <li><a href="/managers/studio/">影厅管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/movie/">影片管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/seat/">座位管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/schedule/">演出计划管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/finance/">财务管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/booking/">票房管理<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/managers/studio/">影厅管理<i
+                                            class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/managers/movie/">影片管理<i
+                                            class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/managers/seat/">座位管理<i class="fa fa-chevron-right pull-right"></i></a>
+                                    </li>
+                                    <li><a href="/managers/schedule/">演出计划管理<i
+                                            class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/managers/finance/">财务管理<i class="fa fa-chevron-right pull-right"></i></a>
+                                    </li>
+                                    <li><a href="/managers/booking/">票房管理<i class="fa fa-chevron-right pull-right"></i></a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="has_submenu current open active c-open">
@@ -101,8 +111,10 @@
                                     <span class="pull-right"><i class="fa fa-angle-down"></i></span>
                                 </a>
                                 <ul class="sub-menu" style="display: block;">
-                                    <li><a href="/managers/employee/">人事管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/passwd/">密码修改<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/managers/employee/">人事管理<i class="fa fa-chevron-right pull-right"></i></a>
+                                    </li>
+                                    <li><a href="/managers/passwd/">密码修改<i
+                                            class="fa fa-chevron-right pull-right"></i></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -130,21 +142,28 @@
                     <div class="panel-heading"> 座位管理</div>
                     <div class="panel-body">
                         <div style="margin-bottom:15px; margin-top: 8px">
-                            <a href="/managers/seat/add/"><button type="button" class="king-btn mr10  king-success">添加座位</button></a>
+                            <a href="/managers/seat/add/">
+                                <button type="button" class="king-btn mr10  king-success">添加座位</button>
+                            </a>
                         </div>
                         <hr style="margin-left: -15px; margin-right: -15px;"/>
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" action="/managers/seat/" method="post">
                             <div class="container-fluid mb0 ">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group clearfix ">
                                             <label class="col-sm-3 control-label bk-lh30 pt0">演出厅ID：</label>
                                             <div class="col-sm-9">
-                                                <select name="" id="" class="form-control bk-valign-top">
-                                                    <option value="选择项1">选择项1</option>
-                                                    <option value="选择项2">选择项2</option>
-                                                    <option value="选择项3">选择项3</option>
-                                                    <option value="选择项4">选择项4</option>
+                                                <select name="studio_id" id="" class="form-control bk-valign-top">
+                                                    <%
+                                                        ArrayList<Studio> studios = (ArrayList<Studio>) request.getAttribute("studios");
+                                                        for (Studio studio : studios) {
+                                                    %>
+                                                    <option value="<%=studio.getId()%>"><%=studio.getName()%>
+                                                    </option>
+                                                    <%
+                                                        }
+                                                    %>
                                                 </select>
                                             </div>
                                         </div>
@@ -152,7 +171,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group clearfix">
                                             <div class="col-sm-9 col-sm-offset-3">
-                                                <button type="button" class="king-btn mr10  king-success">查询</button>
+                                                <button type="submit" class="king-btn mr10  king-success">查询</button>
                                             </div>
                                         </div>
                                     </div>
@@ -172,92 +191,40 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <%
+                                ArrayList<Seat> seats = (ArrayList<Seat>) request.getAttribute("seats");
+                                if (seats != null) {
+                                    for (int i=0; i <seats.size();i++) {
+                            %>
                             <tr>
-                                <td style="width: 70px;">1</td>
-                                <td style="width: 15%;">Ravi Kumar</td>
-                                <td style="width: 15%;">India</td>
-                                <td style="width: 15%;">Paid</td>
+                                <td style="width: 70px;"><%=i+1%></td>
+                                <td style="width: 15%;"><%=seats.get(i).getRow()%></td>
+                                <td style="width: 15%;"><%=seats.get(i).getCol()%></td>
+                                <td style="width: 15%;"><%=seats.get(i).getStatus()%></td>
                                 <td>
                                     <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok"></i>
                                     </button>
                                     <button class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-edit"></i>
                                     </button>
-                                    <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>
-                                    </button>
+                                    <a href="/managers/seat/?type=delete&id=<%=seats.get(i).getId()%>"><button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>
+                                    </button></a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="width: 70px;">2</td>
-                                <td style="width: 15%;">Ravi Kumar</td>
-                                <td style="width: 15%;">India</td>
-                                <td style="width: 15%;">Paid</td>
-                                <td>
-                                    <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-edit"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 70px;">3</td>
-                                <td style="width: 15%;">Ravi Kumar</td>
-                                <td style="width: 15%;">India</td>
-                                <td style="width: 15%;">Paid</td>
-                                <td>
-                                    <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-edit"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 70px;">4</td>
-                                <td style="width: 15%;">Ravi Kumar</td>
-                                <td style="width: 15%;">India</td>
-                                <td style="width: 15%;">Paid</td>
-                                <td>
-                                    <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-edit"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 70px;">5</td>
-                                <td style="width: 15%;">Ravi Kumar</td>
-                                <td style="width: 15%;">India</td>
-                                <td style="width: 15%;">Paid</td>
-                                <td>
-                                    <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-edit"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 70px;">6</td>
-                                <td style="width: 15%;">Ravi Kumar</td>
-                                <td style="width: 15%;">India</td>
-                                <td style="width: 15%;">Paid</td>
-                                <td>
-                                    <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-edit"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                            <%
+                                    }
+                                }
+                            %>
                             </tbody>
                         </table>
+                        <br/>
+                        <br/>
+                        <div style="color: red">
+                            <%
+                                if (null != request.getAttribute("message")) {
+                                    out.println(request.getAttribute("message"));
+                                }
+                            %>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -280,39 +247,6 @@
             })
         });
     })
-</script>
-<script>
-    $(function () {
-        function renderTpl(str, cfg) {
-            var re = /(#(.+?)#)/g;
-
-            return str.replace(re, function () {
-                var val = cfg[arguments[2]] + '';
-                if (typeof val == 'undefined') {
-                    val = '';
-                }
-                return val;
-            });
-        }
-
-        // 异步请求后台数据
-        $.ajax({
-            url: 'https://o.qcloud.com/static_api/v3/components/table7/data.json',
-            type: 'GET',
-            success: function (res) {
-                var _html = ' ';
-                var list = res.items;
-                var tpl = $('#tpl_14962226923362').html();
-                var headerTpl = $('#header_tpl_14962226923362').html();
-                for (var i = 0, len = list.length; i < len; i++) {
-                    var item = list[i];
-                    _html += renderTpl(tpl, item)
-                }
-                $('.ranger-box2 tbody').html(_html);
-                $('.ranger-box2 thead').html(renderTpl(headerTpl, res.catalogues));
-            }
-        });
-    });
 </script>
 </body>
 
