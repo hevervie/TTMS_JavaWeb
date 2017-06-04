@@ -1,6 +1,7 @@
 package edu.xupt.cs.se.dao;
 
 import edu.xupt.cs.se.idao.Ilevel;
+import edu.xupt.cs.se.model.Lang;
 import edu.xupt.cs.se.model.Level;
 import edu.xupt.cs.se.model.Level;
 import edu.xupt.cs.se.util.ConnectionManager;
@@ -8,6 +9,7 @@ import edu.xupt.cs.se.util.ConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -65,7 +67,30 @@ public class LevelDAO implements Ilevel {
 
     @Override
     public ArrayList<Level> getAllLevel() {
-        return null;
+        ArrayList<Level> list = new ArrayList<>();
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+
+            String sql = "select * from level";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Level level = new Level();
+                level.setId(rs.getInt("id"));
+                level.setType(rs.getString("type"));
+                // 将该用户信息插入列表
+                list.add(level);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(rs, ps, conn);
+            return list;
+        }
+
     }
 
 

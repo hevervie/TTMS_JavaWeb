@@ -2,12 +2,14 @@ package edu.xupt.cs.se.dao;
 
 import edu.xupt.cs.se.idao.Itype;
 import edu.xupt.cs.se.model.Employee;
+import edu.xupt.cs.se.model.Level;
 import edu.xupt.cs.se.model.Type;
 import edu.xupt.cs.se.util.ConnectionManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -65,7 +67,29 @@ public class TypeDAO implements Itype {
     }
 
     @Override
-    public ArrayList<Type> getAllType(int page) {
-        return null;
+    public ArrayList<Type> getAllType() {
+        ArrayList<Type> list = new ArrayList<>();
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+
+            String sql = "select * from type";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Type type = new Type();
+                type.setId(rs.getInt("id"));
+                type.setType(rs.getString("type"));
+                // 将该用户信息插入列表
+                list.add(type);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(rs, ps, conn);
+            return list;
+        }
     }
 }

@@ -2,12 +2,14 @@ package edu.xupt.cs.se.dao;
 
 import edu.xupt.cs.se.idao.Ilang;
 import edu.xupt.cs.se.model.Lang;
+import edu.xupt.cs.se.model.Lang;
 import edu.xupt.cs.se.model.Type;
 import edu.xupt.cs.se.util.ConnectionManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -65,6 +67,28 @@ public class LangDAO implements Ilang {
 
     @Override
     public ArrayList<Lang> getAllLang() {
-        return null;
+        ArrayList<Lang> list = new ArrayList<>();
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+
+            String sql = "select * from lang";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Lang Lang = new Lang();
+                Lang.setId(rs.getInt("id"));
+                Lang.setType(rs.getString("type"));
+                // 将该用户信息插入列表
+                list.add(Lang);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(rs, ps, conn);
+            return list;
+        }
     }
 }

@@ -21,12 +21,12 @@ public class ManagerStudioServlet extends HttpServlet {
 
         //需要影厅信息
         StudioDAO studioDAO = new StudioDAO();
-        ArrayList<Studio> studios = studioDAO.getAllStudio();
+        ArrayList<Studio> studios = studioDAO.getStudioByTheater((int) request.getSession().getAttribute("theaterid"));
         System.out.println(studios.size());
         request.setAttribute("studios", studios);
         if (null != request.getParameter("type") && request.getParameter("type").equals("delete")) {
 
-            System.out.println(request. getParameter("id"));
+            System.out.println(request.getParameter("id"));
             String str_id = request.getParameter("id");
             int id;
             try {
@@ -36,7 +36,7 @@ public class ManagerStudioServlet extends HttpServlet {
                 request.getRequestDispatcher("/manager/studio_manager.jsp").forward(request, response);
                 return;
             }
-            System.out.println("id = "+id);
+            System.out.println("id = " + id);
             if (studioDAO.delete(id)) {
                 //删除成功
                 response.sendRedirect("/managers/studio/");
@@ -44,7 +44,7 @@ public class ManagerStudioServlet extends HttpServlet {
                 request.setAttribute("message", "删除失败");
                 request.getRequestDispatcher("/manager/studio_manager.jsp").forward(request, response);
             }
-        }else {
+        } else {
             request.getRequestDispatcher("/manager/studio_manager.jsp").forward(request, response);
         }
     }

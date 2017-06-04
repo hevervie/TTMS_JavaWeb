@@ -24,5 +24,5 @@ public interface Itype {
 
     public ArrayList<Type> getTypeByPage(int page);
 
-    public ArrayList<Type> getAllType(int page);
+    public ArrayList<Type> getAllType();
 }

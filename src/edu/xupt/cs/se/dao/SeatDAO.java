@@ -2,7 +2,12 @@ package edu.xupt.cs.se.dao;
 
 import edu.xupt.cs.se.idao.Iseat;
 import edu.xupt.cs.se.model.Seat;
+import edu.xupt.cs.se.util.ConnectionManager;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -11,12 +16,55 @@ import java.util.ArrayList;
 public class SeatDAO implements Iseat {
     @Override
     public boolean insert(Seat seat) {
-        return false;
+        boolean rtu = false;
+        if (seat == null) {
+            return rtu;
+        }
+        //获取Connection
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement ps = null;
+        try {
+            String sql = "insert into seat(studio_id, row, col,status) VALUES (?,?,?,?)";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, seat.getStudio_id());
+            ps.setInt(2, seat.getRow());
+            ps.setInt(3, seat.getCol());
+            ps.setInt(4, seat.getStatus());
+            ps.executeUpdate();
+            rtu = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(null, ps, conn);
+            return rtu;
+        }
     }
 
     @Override
     public boolean delete(int seat_id) {
-        return false;
+        boolean rtu = false;
+        if (seat_id <= 0) {
+            return rtu;
+        }
+        //获取Connection
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement ps = null;
+        try {
+            String sql = "delete from seat where id=?;";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, seat_id);
+            ps.executeUpdate();
+            rtu = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(null, ps, conn);
+            return rtu;
+        }
     }
 
     @Override
@@ -51,6 +99,34 @@ public class SeatDAO implements Iseat {
 
     @Override
     public ArrayList<Seat> getSeatByStudio(int studio_id) {
-        return null;
+        if (studio_id <= 0) {
+            return null;
+        }
+        ArrayList<Seat> list = new ArrayList<>();
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select * from seat where studio_id = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, studio_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Seat seat = new Seat();
+                seat.setId(rs.getInt("id"));
+                seat.setStudio_id(rs.getInt("studio_id"));
+                seat.setRow(rs.getInt("row"));
+                seat.setCol(rs.getInt("col"));
+                seat.setStatus(rs.getInt("status"));
+                // 将该用户信息插入列表
+                list.add(seat);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(rs, ps, conn);
+            return list;
+        }
     }
 }

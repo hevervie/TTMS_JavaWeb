@@ -20,9 +20,9 @@ import java.util.ArrayList;
 public class ManagerSeatServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         StudioDAO studioDAO = new StudioDAO();
-        ArrayList<Studio> studios = studioDAO.getAllStudio();
+
+        ArrayList<Studio> studios = studioDAO.getStudioByTheater((int) request.getSession().getAttribute("theaterid"));
         SeatDAO seatDAO = new SeatDAO();
-        System.out.println(studios.size());
         if (null != request.getParameter("studio_id")) {
             String str_id = request.getParameter("studio_id");
             int studio_id;

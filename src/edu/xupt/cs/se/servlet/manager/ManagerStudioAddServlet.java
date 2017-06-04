@@ -1,5 +1,6 @@
 package edu.xupt.cs.se.servlet.manager;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import edu.xupt.cs.se.dao.SeatDAO;
 import edu.xupt.cs.se.dao.StudioDAO;
 import edu.xupt.cs.se.model.Seat;
@@ -51,10 +52,9 @@ public class ManagerStudioAddServlet extends HttpServlet {
         studio.setName(name);
         studio.setRow(row);
         studio.setCol(col);
-        studio.setTheater_id(1);
-
+        studio.setTheater_id((int) request.getSession().getAttribute("theaterid"));
         if (studioDAO.insert(studio)) {
-            Studio s = studioDAO.getStudioByName(name);
+            Studio s = studioDAO.getStudioByName(name, (int) request.getSession().getAttribute("theaterid"));
             for (int i = 1; i <= row; i++) {
                 for (int j = 1; j <= col; j++) {
                     Seat seat = new Seat();

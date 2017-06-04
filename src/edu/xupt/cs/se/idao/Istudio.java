@@ -24,6 +24,10 @@ public interface Istudio {
 
     public Studio getStudioByID(int studio_id);
 
+    public Studio getStudioByName(String studio_name);
+
+    public Studio getStudioByName(String studio_name, int theater_id);
+
     public ArrayList<Studio> getStudioByTheater(int page, int theater_id);
 
     public ArrayList<Studio> getStudioByPage(int page);

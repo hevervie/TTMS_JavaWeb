@@ -3,6 +3,7 @@ package edu.xupt.cs.se.servlet;
 import edu.xupt.cs.se.dao.EmployeeDAO;
 import edu.xupt.cs.se.dao.GeneralmanagerDAO;
 import edu.xupt.cs.se.dao.ManagerDAO;
+import edu.xupt.cs.se.model.Manager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,8 +45,10 @@ public class LoginServlet extends HttpServlet {
         } else if (username.charAt(0) == '2') {
             ManagerDAO login = new ManagerDAO();
             if (login.check(username, password)) {
-                request.getSession().setAttribute("userid", login.getManagerByNumber(username).getId());
-                request.getSession().setAttribute("theaterid", login.getManagerByNumber(username).getTheater_id());
+                Manager manager = login.getManagerByNumber(username);
+                System.out.println("theaterid = "+manager.getTheater_id());
+                request.getSession().setAttribute("userid", manager.getId());
+                request.getSession().setAttribute("theaterid", manager.getTheater_id());
                 request.getSession().setAttribute("login", "ok");
                 request.getSession().setAttribute("actor", "managers");
                 response.sendRedirect("/managers/");

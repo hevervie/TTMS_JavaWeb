@@ -10,7 +10,7 @@ import java.io.IOException;
  * Created by MR.D on 2017/5/31.
  */
 
-@WebFilter(filterName = "CharsetAllEncodingFilter", initParams = {@WebInitParam(name = "encoding", value = "UTF-8")})
+@WebFilter(filterName = "CharsetAllEncodingFilter", urlPatterns = "/*", initParams = {@WebInitParam(name = "encoding", value = "UTF-8")})
 public class CharsetAllEncodingFilter implements Filter {
 
     private String encoding = null;

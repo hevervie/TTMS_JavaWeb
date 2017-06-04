@@ -136,8 +136,6 @@
                         <li>座位管理</li>
                     </ul>
                 </div>
-                <!-- 面板 编辑 开始 -->
-                <!-- 面板 编辑 结束 -->
                 <div class="panel panel-default mb0">
                     <div class="panel-heading"> 座位管理</div>
                     <div class="panel-body">
@@ -152,7 +150,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group clearfix ">
-                                            <label class="col-sm-3 control-label bk-lh30 pt0">演出厅ID：</label>
+                                            <label class="col-sm-3 control-label bk-lh30 pt0">演出厅：</label>
                                             <div class="col-sm-9">
                                                 <select name="studio_id" id="" class="form-control bk-valign-top">
                                                     <%

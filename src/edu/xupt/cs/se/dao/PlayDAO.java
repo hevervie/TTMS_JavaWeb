@@ -2,7 +2,6 @@ package edu.xupt.cs.se.dao;
 
 import edu.xupt.cs.se.idao.Iplay;
 import edu.xupt.cs.se.model.Play;
-import edu.xupt.cs.se.model.Studio;
 import edu.xupt.cs.se.util.ConnectionManager;
 
 import java.sql.Connection;
@@ -17,7 +16,37 @@ import java.util.ArrayList;
 public class PlayDAO implements Iplay {
     @Override
     public boolean insert(Play play) {
-        return false;
+        boolean rtu = false;
+        if (play == null) {
+            return rtu;
+        }
+        //获取Connection
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement ps = null;
+        try {
+
+            String sql = "insert into play(name,type_id,lang_id,level_id,score,introd,image_url,length,price,status) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, play.getName());
+            ps.setInt(2, play.getType_id());
+            ps.setInt(3, play.getLang_id());
+            ps.setInt(4, play.getLevel_id());
+            ps.setFloat(5, play.getScore());
+            ps.setString(6, play.getIntrod());
+            ps.setString(7, play.getImage_url());
+            ps.setInt(8, play.getLength());
+            ps.setFloat(9, play.getPrice());
+            ps.setInt(10, play.getStatus());
+            ps.executeUpdate();
+            rtu = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(null, ps, conn);
+            return rtu;
+        }
     }
 
     @Override
@@ -52,7 +81,43 @@ public class PlayDAO implements Iplay {
 
     @Override
     public Play getPlayByID(int play_id) {
-        return null;
+        Play rtu = null;
+
+        if (play_id <= 0) {
+            return rtu;
+        }
+        //获取Connection
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select *  from play where id=?;";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, play_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                rtu = new Play();
+                rtu.setId(rs.getInt("id"));
+                rtu.setName(rs.getString("name"));
+                rtu.setType_id(rs.getInt("type_id"));
+                rtu.setLang_id(rs.getInt("lang_id"));
+                rtu.setLevel_id(rs.getInt("level_id"));
+                rtu.setIntrod(rs.getString("introd"));
+                rtu.setImage_url(rs.getString("image_url"));
+                rtu.setLength(rs.getInt("length"));
+                rtu.setPrice(rs.getFloat("price"));
+                rtu.setScore(rs.getFloat("score"));
+                rtu.setStatus(rs.getInt("status"));
+            }
+            return rtu;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(null, ps, conn);
+            return rtu;
+        }
     }
 
     @Override

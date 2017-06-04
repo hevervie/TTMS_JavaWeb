@@ -1,4 +1,6 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="edu.xupt.cs.se.model.Studio" %>
+<%@ page import="edu.xupt.cs.se.model.Play" %><%--
   Created by IntelliJ IDEA.
   User: zhoupan
   Date: 17-6-1
@@ -130,45 +132,62 @@
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <div class="col-md-6">
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" action="/managers/schedule/add/" method="post">
                                         <div class="form-group clearfix ">
-                                            <label class="col-sm-3 control-label bk-lh30 pt0">影厅ID：</label>
+                                            <label class="col-sm-3 control-label bk-lh30 pt0">影厅：</label>
                                             <div class="col-sm-9">
-                                                <select name="" id="" class="form-control bk-valign-top">
-                                                    <option value="选择项1">选择项1</option>
-                                                    <option value="选择项2">选择项2</option>
-                                                    <option value="选择项3">选择项3</option>
-                                                    <option value="选择项4">选择项4</option>
+                                                <select name="studio" class="form-control bk-valign-top">
+                                                    <%
+                                                        ArrayList<Studio> studios = (ArrayList<Studio>) request.getAttribute("studios");
+
+                                                        for(Studio studio: studios){
+                                                    %>
+                                                    <option value="<%=studio.getId()%>"><%=studio.getName()%></option>
+                                                    <%
+                                                        }
+                                                    %>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group clearfix ">
                                             <label class="col-sm-3 control-label bk-lh30 pt0">剧目：</label>
                                             <div class="col-sm-9">
-                                                <select name="" id="" class="form-control bk-valign-top">
-                                                    <option value="选择项1">选择项1</option>
-                                                    <option value="选择项2">选择项2</option>
-                                                    <option value="选择项3">选择项3</option>
-                                                    <option value="选择项4">选择项4</option>
+                                                <select name="play" class="form-control bk-valign-top">
+                                                    <%
+                                                        ArrayList<Play> plays = (ArrayList<Play>) request.getAttribute("plays");
+                                                        for(Play play : plays){
+                                                    %>
+                                                    <option value="<%=play.getId()%>"><%=play.getName()%></option>
+                                                    <%
+                                                        }
+                                                    %>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group clearfix ">
                                             <label class="col-sm-3 control-label bk-lh30 pt0">放映时间：</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control bk-valign-top" id="" placeholder="请输入放映时间"> </div>
+                                                <input type="text" class="form-control bk-valign-top" name="time" placeholder="如：20170601230000"> </div>
                                         </div>
                                         <div class="form-group clearfix ">
                                             <label class="col-sm-3 control-label bk-lh30 pt0">折扣：</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control bk-valign-top" id="" placeholder="请输入折扣"> </div>
+                                                <input type="text" class="form-control bk-valign-top" name="discount" placeholder="如：0.7"> </div>
                                         </div>
-                                    </form>
-                                    <form class="form-horizontal">
                                         <div class="form-group clearfix">
                                             <div class="col-sm-9 col-sm-offset-3">
-                                                <button type="button" class="king-btn mr10  king-success">提交</button>
+                                                <button type="submit" class="king-btn mr10  king-success">提交</button>
                                                 <a href="/managers/schedule/"><button type="button" class="king-btn king-default ">取消</button></a>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="form-group clearfix">
+                                            <div class="col-sm-9 col-sm-offset-3" style="color: red">
+                                                <%
+                                                    if (null != request.getAttribute("message")) {
+                                                        out.println(request.getAttribute("message"));
+                                                    }
+                                                %>
                                             </div>
                                         </div>
                                     </form>

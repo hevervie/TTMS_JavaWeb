@@ -1,4 +1,7 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="edu.xupt.cs.se.model.Schedule" %>
+<%@ page import="edu.xupt.cs.se.dao.PlayDAO" %>
+<%@ page import="edu.xupt.cs.se.dao.StudioDAO" %><%--
   Created by IntelliJ IDEA.
   User: zhoupan
   Date: 17-6-1
@@ -50,14 +53,16 @@
                 <div class="nav-container">
                     <div class="navbar-header">
                         <button class="pull-right visible-xs navbar-toggle collapsed navbar-toggle-sm" type="button"
-                                data-toggle="collapse" data-target="#king-header2-navbar-collapse"><i class="fa fa-fw fa-ellipsis-v"> </i></button>
+                                data-toggle="collapse" data-target="#king-header2-navbar-collapse"><i
+                                class="fa fa-fw fa-ellipsis-v"> </i></button>
                         <a class="navbar-brand" href="/managers/"><span style="font-size: 24px">光影人生</span>-影院票务管理系统</a>
                     </div>
                     <div class="navbar-collapse collapse" id="king-header2-navbar-collapse">
                         <ul class="nav navbar-nav navbar-left hidden-sm"></ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> admin <b class="caret"></b></a>
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i
+                                        class="fa fa-user"></i> admin <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="javascript:;"><i class="fa fa-fw fa-user"></i> 用户</a>
@@ -107,8 +112,10 @@
                                     <span class="pull-right"><i class="fa fa-angle-down"></i></span>
                                 </a>
                                 <ul class="sub-menu" style="display: block;">
-                                    <li><a href="/managers/employee/">人事管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/passwd/">密码修改<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/managers/employee/">人事管理<i class="fa fa-chevron-right pull-right"></i></a>
+                                    </li>
+                                    <li><a href="/managers/passwd/">密码修改<i
+                                            class="fa fa-chevron-right pull-right"></i></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -138,7 +145,7 @@
                                 <button type="button" class="king-btn mr10  king-success">添加演出计划</button>
                             </a>
                         </div>
-                        <hr style="margin-left: -15px; margin-right: -15px;"/>
+                        <hr style="margin-left: -15px; margin-right: -15px; margin-top: 0"/>
                         <table class="table mb0 pr15 ranger-box2 table-striped table-bordered table-header-bg table-out-bordered table-hover  table-striped table-bordered table-header-bg table-out-bordered table-hover ">
                             <thead>
                             <tr>
@@ -153,110 +160,43 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <%
+                                ArrayList<Schedule> schedules = (ArrayList<Schedule>) request.getAttribute("schedules");
+                                StudioDAO studioDAO = new StudioDAO();
+                                PlayDAO playDAO = new PlayDAO();
+                                for (int i=0;i<schedules.size();i++) {
+                            %>
                             <tr>
-                                <td style="width: 70px;">1</td>
-                                <td style="width: 10%;">Ravi Kumar</td>
-                                <td style="width: 30%;">India</td>
-                                <td style="width: 10%;">India</td>
-                                <td style="width: 5%;">India</td>
-                                <td style="width: 5%;">23/12/2012</td>
-                                <td style="width: 10%;">Paid</td>
+                                <td style="width: 70px;"><%=i+1%></td>
+                                <td style="width: 10%;"><%=studioDAO.getStudioByID(schedules.get(i).getStudio_id()).getName()%></td>
+                                <td style="width: 30%;"><%=playDAO.getPlayByID(schedules.get(i).getPlay_id()).getName()%></td>
+                                <td style="width: 10%;"><%=schedules.get(i).getTime()%></td>
+                                <td style="width: 5%;"><%=schedules.get(i).getDiscount()%></td>
+                                <td style="width: 5%;"><%=schedules.get(i).getPrice()%></td>
+                                <td style="width: 10%;"><%=schedules.get(i).getStatus()%></td>
                                 <td>
                                     <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok"></i>
                                     </button>
                                     <button class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-edit"></i>
                                     </button>
-                                    <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>
-                                    </button>
+                                    <a href="/managers/schedule/?type=delete&id=<%=schedules.get(i).getId()%>"><button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>
+                                    </button></a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="width: 70px;">1</td>
-                                <td style="width: 10%;">Ravi Kumar</td>
-                                <td style="width: 30%;">India</td>
-                                <td style="width: 10%;">India</td>
-                                <td style="width: 5%;">India</td>
-                                <td style="width: 5%;">23/12/2012</td>
-                                <td style="width: 10%;">Paid</td>
-                                <td>
-                                    <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-edit"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 70px;">1</td>
-                                <td style="width: 10%;">Ravi Kumar</td>
-                                <td style="width: 30%;">India</td>
-                                <td style="width: 10%;">India</td>
-                                <td style="width: 5%;">India</td>
-                                <td style="width: 5%;">23/12/2012</td>
-                                <td style="width: 10%;">Paid</td>
-                                <td>
-                                    <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-edit"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 70px;">1</td>
-                                <td style="width: 10%;">Ravi Kumar</td>
-                                <td style="width: 30%;">India</td>
-                                <td style="width: 10%;">India</td>
-                                <td style="width: 5%;">India</td>
-                                <td style="width: 5%;">23/12/2012</td>
-                                <td style="width: 10%;">Paid</td>
-                                <td>
-                                    <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-edit"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 70px;">1</td>
-                                <td style="width: 10%;">Ravi Kumar</td>
-                                <td style="width: 30%;">India</td>
-                                <td style="width: 10%;">India</td>
-                                <td style="width: 5%;">India</td>
-                                <td style="width: 5%;">23/12/2012</td>
-                                <td style="width: 10%;">Paid</td>
-                                <td>
-                                    <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-edit"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 70px;">1</td>
-                                <td style="width: 10%;">Ravi Kumar</td>
-                                <td style="width: 30%;">India</td>
-                                <td style="width: 10%;">India</td>
-                                <td style="width: 5%;">India</td>
-                                <td style="width: 5%;">23/12/2012</td>
-                                <td style="width: 10%;">Paid</td>
-                                <td>
-                                    <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-edit"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                            <%
+                                }
+                            %>
                             </tbody>
                         </table>
+                        <br/>
+                        <br/>
+                        <div style="color: red">
+                            <%
+                                if (null != request.getAttribute("message")) {
+                                    out.println(request.getAttribute("message"));
+                                }
+                            %>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -279,39 +219,6 @@
             })
         });
     })
-</script>
-<script>
-    $(function () {
-        function renderTpl(str, cfg) {
-            var re = /(#(.+?)#)/g;
-
-            return str.replace(re, function () {
-                var val = cfg[arguments[2]] + '';
-                if (typeof val == 'undefined') {
-                    val = '';
-                }
-                return val;
-            });
-        }
-
-        // 异步请求后台数据
-        $.ajax({
-            url: 'https://o.qcloud.com/static_api/v3/components/table7/data.json',
-            type: 'GET',
-            success: function (res) {
-                var _html = ' ';
-                var list = res.items;
-                var tpl = $('#tpl_14962226923362').html();
-                var headerTpl = $('#header_tpl_14962226923362').html();
-                for (var i = 0, len = list.length; i < len; i++) {
-                    var item = list[i];
-                    _html += renderTpl(tpl, item)
-                }
-                $('.ranger-box2 tbody').html(_html);
-                $('.ranger-box2 thead').html(renderTpl(headerTpl, res.catalogues));
-            }
-        });
-    });
 </script>
 </body>
 

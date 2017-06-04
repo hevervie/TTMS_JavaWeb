@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="edu.xupt.cs.se.model.Studio" %><%--
   Created by IntelliJ IDEA.
   User: Shinelon
   Date: 2017/6/1
@@ -106,11 +107,8 @@
                 </div>
             </nav>
         </div>
-        <!-- sidebar end -->
-        <!-- content start -->
         <div class="king-content-wrap">
             <div class="king-layout1-content" style="margin-left: 216px;">
-                <!-- <div class="king-page-topbar pl20 pr20 {{ marginStyle }}"> -->
                 <div class="king-page-topbar ml15">
                     <h3 class="king-topbar-title mb0">
                         <span></span>
@@ -121,8 +119,6 @@
                         <li>添加座位</li>
                     </ul>
                 </div>
-                <!-- 面板 编辑 开始 -->
-                <!-- 面板 编辑 结束 -->
                 <div class="panel panel-default mb0">
                     <div class="panel-heading"> 添加座位 </div>
                     <div class="panel-body">
@@ -130,34 +126,45 @@
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <div class="col-md-6">
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" method="post" action="/managers/seat/add/">
                                         <div class="form-group clearfix ">
-                                            <label class="col-sm-3 control-label bk-lh30 pt0">影厅ID：</label>
+                                            <label class="col-sm-3 control-label bk-lh30 pt0">影厅：</label>
                                             <div class="col-sm-9">
-                                                <select name="" class="form-control bk-valign-top">
-                                                    <option value="选择项1">选择项1</option>
-                                                    <option value="选择项2">选择项2</option>
-                                                    <option value="选择项3">选择项3</option>
-                                                    <option value="选择项4">选择项4</option>
+                                                <select name="studio" class="form-control bk-valign-top">
+                                                    <%
+                                                        ArrayList<Studio> studios = (ArrayList<Studio>) request.getAttribute("studios");
+                                                        for(Studio studio: studios){
+                                                    %>
+                                                    <option value="<%=studio.getId()%>"><%=studio.getName()%></option>
+                                                    <%}%>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group clearfix ">
                                             <label class="col-sm-3 control-label bk-lh30 pt0">行：</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control bk-valign-top" id="" placeholder="请输入行"> </div>
+                                                <input type="text" class="form-control bk-valign-top" name="row" placeholder="请输入行"> </div>
                                         </div>
                                         <div class="form-group clearfix ">
                                             <label class="col-sm-3 control-label bk-lh30 pt0">列：</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control bk-valign-top" id="" placeholder="请输入列"> </div>
+                                                <input type="text" class="form-control bk-valign-top" name="col"  placeholder="请输入列"> </div>
                                         </div>
-                                    </form>
-                                    <form class="form-horizontal">
                                         <div class="form-group clearfix">
                                             <div class="col-sm-9 col-sm-offset-3">
-                                                <button type="button" class="king-btn mr10  king-success">提交</button>
+                                                <button type="submit" class="king-btn mr10  king-success">提交</button>
                                                 <a href="/managers/seat/"><button type="button" class="king-btn king-default ">取消</button></a>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <br/>
+                                        <div class="form-group clearfix">
+                                            <div class="col-sm-9 col-sm-offset-3" style="color: red">
+                                                <%
+                                                    if (null != request.getAttribute("message")) {
+                                                        out.println(request.getAttribute("message"));
+                                                    }
+                                                %>
                                             </div>
                                         </div>
                                     </form>
