@@ -7,6 +7,7 @@ import edu.xupt.cs.se.dao.StudioDAO;
  */
 public class StudioDATTest {
     public static void main(String[] args) {
-        System.out.println(new StudioDAO().delete(5));
+        System.out.println(new StudioDAO().getStudioByTheater(1).size());
+
     }
 }
