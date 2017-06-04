@@ -67,10 +67,9 @@ public class EmployeeDAO implements Iemployee {
         Connection conn = ConnectionManager.getInstance().getConnection();
         PreparedStatement ps = null;
         try {
-
-            String sql = "insert into studio(theater_id,name,row,col) VALUES (?,?,?,?)";
+            String sql = "insert into employee(emp_no, theater_id, name, passwd, tel) VALUES (?,?,?,?,?)";
             ps = conn.prepareStatement(sql);
-
+            ps.setString(1,employee.getEmp_no());
             ps.setInt(2, employee.getTheater_id());
             ps.setString(3, employee.getName());
             ps.setString(4, employee.getPasswd());
@@ -272,7 +271,36 @@ public class EmployeeDAO implements Iemployee {
 
     @Override
     public ArrayList<Employee> getEmployeeByTheater(int theater_id) {
-        return null;
+        if(theater_id <=0){
+            return null;
+        }
+        ArrayList<Employee> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = ConnectionManager.getInstance().getConnection();
+            String sql = "select * from employee where theater_id = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, theater_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Employee employee = new Employee();
+                employee.setId(rs.getInt("id"));
+                employee.setEmp_no(rs.getString("emp_no"));
+                employee.setTheater_id(rs.getInt("theater_id"));
+                employee.setName(rs.getString("name"));
+                employee.setPasswd(rs.getString("passwd"));
+                employee.setTel(rs.getString("tel"));
+                // 将该用户信息插入列表
+                list.add(employee);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(rs, ps, conn);
+            return list;
+        }
     }
 
     @Override

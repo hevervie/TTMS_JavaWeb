@@ -1,4 +1,9 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="edu.xupt.cs.se.model.Play" %>
+<%@ page import="java.util.Set" %>
+<%@ page import="edu.xupt.cs.se.model.Bill" %>
+<%@ page import="edu.xupt.cs.se.dao.PlayDAO" %><%--
   Created by IntelliJ IDEA.
   User: zhoupan
   Date: 17-6-1
@@ -10,7 +15,7 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
@@ -18,8 +23,10 @@
     <!-- Bootstrap css -->
     <link href="https://o.qcloud.com/static_api/v3/assets/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- kendo ui css -->
-    <link href="https://o.qcloud.com/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.common.min.css" rel="stylesheet">
-    <link href="https://o.qcloud.com/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.default.min.css" rel="stylesheet">
+    <link href="https://o.qcloud.com/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.common.min.css"
+          rel="stylesheet">
+    <link href="https://o.qcloud.com/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.default.min.css"
+          rel="stylesheet">
     <!-- font-awesome -->
     <link href="https://o.qcloud.com/static_api/v3/assets/fontawesome/css/font-awesome.css" rel="stylesheet">
     <!--蓝鲸提供的公用样式库 -->
@@ -35,7 +42,9 @@
     <!-- 数据埋点统计 -->
     <script src="https://o.qcloud.com/static_api/analysis.js"></script>
     <!-- 以下两个插件用于在IE8以及以下版本浏览器支持HTML5元素和媒体查询，如果不需要用可以移除 -->
-    <!--[if lt IE 9]><script src="https://o.qcloud.com/static_api/v3/assets/js/html5shiv.min.js"></script><script src="https://o.qcloud.com/static_api/v3/assets/js/respond.min.js"></script><![endif]-->
+    <!--[if lt IE 9]>
+    <script src="https://o.qcloud.com/static_api/v3/assets/js/html5shiv.min.js"></script>
+    <script src="https://o.qcloud.com/static_api/v3/assets/js/respond.min.js"></script><![endif]-->
 </head>
 
 <body class="bg-white" data-bg-color="bg-white">
@@ -46,14 +55,16 @@
                 <div class="nav-container">
                     <div class="navbar-header">
                         <button class="pull-right visible-xs navbar-toggle collapsed navbar-toggle-sm" type="button"
-                                data-toggle="collapse" data-target="#king-header2-navbar-collapse"><i class="fa fa-fw fa-ellipsis-v"> </i></button>
+                                data-toggle="collapse" data-target="#king-header2-navbar-collapse"><i
+                                class="fa fa-fw fa-ellipsis-v"> </i></button>
                         <a class="navbar-brand" href="/managers/"><span style="font-size: 24px">光影人生</span>-影院票务管理系统</a>
                     </div>
                     <div class="navbar-collapse collapse" id="king-header2-navbar-collapse">
                         <ul class="nav navbar-nav navbar-left hidden-sm"></ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> admin <b class="caret"></b></a>
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i
+                                        class="fa fa-user"></i> admin <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="javascript:;"><i class="fa fa-fw fa-user"></i> 用户</a>
@@ -78,27 +89,35 @@
                     <div class="sidebar-inner">
                         <ul class="navi">
                             <li class="has_submenu current open active c-open">
-                                <a href="javascript:void(0);"> <i class="fa fa-gear ">                        </i>
+                                <a href="javascript:void(0);"> <i class="fa fa-gear "> </i>
                                     <span>常用操作</span>
                                     <span class="pull-right"><i class="fa fa-angle-down"></i></span>
                                 </a>
                                 <ul class="sub-menu" style="display: block;">
-                                    <li><a href="/managers/studio/">影厅管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/movie/">影片管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/seat/">座位管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/schedule/">演出计划管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/finance/">财务管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/booking/">票房管理<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/managers/studio/">影厅管理<i
+                                            class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/managers/movie/">影片管理<i
+                                            class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/managers/seat/">座位管理<i class="fa fa-chevron-right pull-right"></i></a>
+                                    </li>
+                                    <li><a href="/managers/schedule/">演出计划管理<i
+                                            class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/managers/finance/">财务管理<i class="fa fa-chevron-right pull-right"></i></a>
+                                    </li>
+                                    <li><a href="/managers/booking/">票房管理<i class="fa fa-chevron-right pull-right"></i></a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="has_submenu current open active c-open">
-                                <a href="javascript:void(0);"> <i class="fa fa-wrench ">                        </i>
+                                <a href="javascript:void(0);"> <i class="fa fa-wrench "> </i>
                                     <span>系统管理</span>
                                     <span class="pull-right"><i class="fa fa-angle-down"></i></span>
                                 </a>
                                 <ul class="sub-menu" style="display: block;">
-                                    <li><a href="/managers/employee/">人事管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/passwd/">密码修改<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/managers/employee/">人事管理<i class="fa fa-chevron-right pull-right"></i></a>
+                                    </li>
+                                    <li><a href="/managers/passwd/">密码修改<i
+                                            class="fa fa-chevron-right pull-right"></i></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -123,7 +142,7 @@
                 <!-- 面板 编辑 开始 -->
                 <!-- 面板 编辑 结束 -->
                 <div class="panel panel-default mb0">
-                    <div class="panel-heading"> 票房统计 </div>
+                    <div class="panel-heading"> 票房统计</div>
                     <div class="panel-body">
                         <table class="table mb0 pr15 ranger-box table-striped table-bordered table-header-bg table-out-bordered table-hover ">
                             <thead>
@@ -135,74 +154,79 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <%
+                                ArrayList<Map<String, Object>> list = (ArrayList<Map<String, Object>>) request.getAttribute("list");
+                                for (int i = 0; i < list.size(); i++) {
+                                    Play play = (Play) list.get(i).get("play");
+                                    int ticket = (int) list.get(i).get("ticket");
+                                    float price = (float) list.get(i).get("price");
+                            %>
                             <tr>
-                                <td style="width: 50px;">1</td>
-                                <td >版本更新</td>
-                                <td style="width: 20%;">完成</td>
-                                <td style="width: 20%;">管理员</td>
+                                <td style="width: 50px;"><%=i + 1%>
+                                </td>
+                                <td><%=play.getName()%>
+                                </td>
+                                <td style="width: 20%;"><%=ticket%>
+                                </td>
+                                <td style="width: 20%;"><%=price%>
+                                </td>
                             </tr>
-                            <tr>
-                                <td style="width: 50px;">2</td>
-                                <td >数据备份</td>
-                                <td style="width: 20%;">完成</td>
-                                <td style="width: 20%;">管理员</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 50px;">3</td>
-                                <td >定时任务</td>
-                                <td style="width: 20%;">完成</td>
-                                <td style="width: 20%;">管理员</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 50px;">4</td>
-                                <td >修复bug</td>
-                                <td style="width: 20%;">完成</td>
-                                <td style="width: 20%;">管理员</td>
-                            </tr>
+                            <%
+                                }
+                            %>
                             </tbody>
                         </table>
                         <hr style="margin-left: -15px; margin-right: -15px;"/>
                         <div class="container-fluid mb0 ">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <form class="form-horizontal">
+                                <form method="post" action="/managers/booking/">
+                                    <div class="col-md-4">
                                         <div class="form-group clearfix ">
-                                            <label class="col-sm-3 control-label bk-lh30 pt0">售票员ID：</label>
+                                            <label class="col-sm-3 control-label bk-lh30 pt0">影片：</label>
                                             <div class="col-sm-9">
-                                                <select name="" id="" class="form-control bk-valign-top">
-                                                    <option value="选择项1">选择项1</option>
-                                                    <option value="选择项2">选择项2</option>
-                                                    <option value="选择项3">选择项3</option>
-                                                    <option value="选择项4">选择项4</option>
+                                                <select name="play" class="form-control bk-valign-top">
+                                                    <option value="0">所有影片</option>
+                                                    <%
+                                                        ArrayList<Play> plays = (ArrayList<Play>) request.getAttribute("plays");
+                                                        for (Play play : plays) {
+                                                    %>
+                                                    <option value="<%=play.getId()%>"><%=play.getName()%>
+                                                    </option>
+                                                    <%
+                                                        }
+                                                    %>
                                                 </select>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-                                <div class="col-md-4">
-                                    <form class="form-horizontal">
+                                    </div>
+                                    <div class="col-md-4">
                                         <div class="form-group clearfix ">
                                             <label class="col-sm-3 control-label bk-lh30 pt0">日期：</label>
                                             <div class="col-sm-9">
-                                                <select name="" id="" class="form-control bk-valign-top">
-                                                    <option value="选择项1">选择项1</option>
-                                                    <option value="选择项2">选择项2</option>
-                                                    <option value="选择项3">选择项3</option>
-                                                    <option value="选择项4">选择项4</option>
+                                                <select name="time" id="" class="form-control bk-valign-top">
+                                                    <option value="all">所有日期</option>
+                                                    <%
+                                                        Set<String> time = (Set<String>) request.getAttribute("time");
+                                                        for (String t : time) {
+                                                    %>
+                                                    <option value="<%=t%>"><%=t%>
+                                                    </option>
+                                                    <%
+                                                        }
+                                                    %>
                                                 </select>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-                                <div class="col-md-4">
-                                    <form class="form-horizontal">
+                                    </div>
+                                    <div class="col-md-4">
                                         <div class="form-group clearfix">
                                             <div class="col-sm-9 col-sm-offset-3">
-                                                <button type="button" class="king-btn mr10  king-success">查询</button>
+                                                <button type="submit" class="king-btn mr10  king-success">查询
+                                                </button>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <hr style="margin-left: -15px; margin-right: -15px; margin-top: 0"/>
@@ -212,44 +236,30 @@
                                 <th style="width: 50px;">#</th>
                                 <th style="width: 10%;">账单ID</th>
                                 <th style="width: 10%;">票ID</th>
-                                <th >电影名称</th>
+                                <th>电影名称</th>
                                 <th style="width: 10%;">单价</th>
                                 <th style="width: 20%">日期</th>
                             </tr>
                             </thead>
                             <tbody>
+                            <%
+                                if (null != request.getAttribute("bills")) {
+                                    PlayDAO playDAO = new PlayDAO();
+                                    ArrayList<Bill> bills = (ArrayList<Bill>) request.getAttribute("bills");
+                                    for (int i = 0; i < bills.size(); i++) {
+                            %>
                             <tr>
-                                <td style="width: 50px;">1</td>
-                                <td style="width: 10%;">版本更新</td>
-                                <td style="width: 10%;">完成</td>
-                                <td >管理员</td>
-                                <td >管理员</td>
-                                <td>2015-09-20</td>
+                                <td style="width: 50px;"><%=i+1%></td>
+                                <td style="width: 10%;"><%=bills.get(i).getId()%></td>
+                                <td style="width: 10%;"><%=bills.get(i).getTicket_id()%></td>
+                                <td><%=playDAO.getPlayByID(bills.get(i).getPlay_id()).getName()%></td>
+                                <td><%=bills.get(i).getPrice()%></td>
+                                <td><%=bills.get(i).getSale_time()%></td>
                             </tr>
-                            <tr>
-                                <td style="width: 50px;">1</td>
-                                <td style="width: 10%;">版本更新</td>
-                                <td style="width: 10%;">完成</td>
-                                <td >管理员</td>
-                                <td >管理员</td>
-                                <td>2015-09-20</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 50px;">1</td>
-                                <td style="width: 10%;">版本更新</td>
-                                <td style="width: 10%;">完成</td>
-                                <td >管理员</td>
-                                <td >管理员</td>
-                                <td>2015-09-20</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 50px;">1</td>
-                                <td style="width: 10%;">版本更新</td>
-                                <td style="width: 10%;">完成</td>
-                                <td >管理员</td>
-                                <td >管理员</td>
-                                <td>2015-09-20</td>
-                            </tr>
+                            <%
+                                    }
+                                }
+                            %>
                             </tbody>
                         </table>
                     </div>
@@ -260,14 +270,14 @@
     </div>
 </div>
 <script>
-    $(function(){
+    $(function () {
         var li = $('.navi li');
-        li.each(function(){
-            $(this).click(function(){
-                if( $(this).hasClass('c-open')){
+        li.each(function () {
+            $(this).click(function () {
+                if ($(this).hasClass('c-open')) {
                     $(this).find('ul').slideUp(350);
                     $(this).removeClass('c-open');
-                }else{
+                } else {
                     $(this).find('ul').slideDown(350);
                     $(this).addClass('c-open');
                 }
@@ -276,13 +286,13 @@
     })
 </script>
 <script>
-    $(function(){
+    $(function () {
         function renderTpl(str, cfg) {
             var re = /(#(.+?)#)/g;
 
-            return str.replace(re, function() {
-                var val = cfg[arguments[2]]+'';
-                if(typeof val == 'undefined') {
+            return str.replace(re, function () {
+                var val = cfg[arguments[2]] + '';
+                if (typeof val == 'undefined') {
                     val = '';
                 }
                 return val;
@@ -293,29 +303,29 @@
         $.ajax({
             url: 'https://o.qcloud.com/static_api/v3/components/table6/data.json',
             type: 'GET',
-            success: function(res){
+            success: function (res) {
                 var _html = ' ';
                 var list = res.items;
                 var tpl = $('#tpl_1496223169613').html();
-                var headerTpl =  $('#header_tpl_1496223169613').html();
-                for (var i=0,len=list.length; i < len; i++){
+                var headerTpl = $('#header_tpl_1496223169613').html();
+                for (var i = 0, len = list.length; i < len; i++) {
                     var item = list[i];
                     _html += renderTpl(tpl, item)
                 }
                 $('#code_1496223169613 tbody').html(_html);
-                $('.ranger-box thead').html(renderTpl(headerTpl,res.catalogues));
+                $('.ranger-box thead').html(renderTpl(headerTpl, res.catalogues));
             }
         });
     });
 </script>
 <script>
-    $(function(){
+    $(function () {
         function renderTpl(str, cfg) {
             var re = /(#(.+?)#)/g;
 
-            return str.replace(re, function() {
-                var val = cfg[arguments[2]]+'';
-                if(typeof val == 'undefined') {
+            return str.replace(re, function () {
+                var val = cfg[arguments[2]] + '';
+                if (typeof val == 'undefined') {
                     val = '';
                 }
                 return val;
@@ -326,17 +336,17 @@
         $.ajax({
             url: 'https://o.qcloud.com/static_api/v3/components/table6/data.json',
             type: 'GET',
-            success: function(res){
+            success: function (res) {
                 var _html = ' ';
                 var list = res.items;
                 var tpl = $('#tpl_1496223311878').html();
-                var headerTpl =  $('#header_tpl_1496223311878').html();
-                for (var i=0,len=list.length; i < len; i++){
+                var headerTpl = $('#header_tpl_1496223311878').html();
+                for (var i = 0, len = list.length; i < len; i++) {
                     var item = list[i];
                     _html += renderTpl(tpl, item)
                 }
                 $('#code_1496223311878 tbody').html(_html);
-                $('.ranger-box thead').html(renderTpl(headerTpl,res.catalogues));
+                $('.ranger-box thead').html(renderTpl(headerTpl, res.catalogues));
             }
         });
     });
