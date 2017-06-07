@@ -3,6 +3,7 @@ package edu.xupt.cs.se.servlet;
 import edu.xupt.cs.se.dao.EmployeeDAO;
 import edu.xupt.cs.se.dao.GeneralmanagerDAO;
 import edu.xupt.cs.se.dao.ManagerDAO;
+import edu.xupt.cs.se.model.Employee;
 import edu.xupt.cs.se.model.Manager;
 
 import javax.servlet.ServletException;
@@ -60,7 +61,9 @@ public class LoginServlet extends HttpServlet {
         } else if (username.charAt(0) == '3') {
             EmployeeDAO login = new EmployeeDAO();
             if (login.check(username, password)) {
-                request.getSession().setAttribute("userid", login.getEmployeeByNumber(username).getId());
+                Employee employee = login.getEmployeeByNumber(username);
+                request.getSession().setAttribute("userid", employee.getId());
+                request.getSession().setAttribute("theaterid", employee.getTheater_id());
                 request.getSession().setAttribute("login", "ok");
                 request.getSession().setAttribute("actor", "employee");
                 response.sendRedirect("/employee/");

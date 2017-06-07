@@ -184,7 +184,6 @@ public class GeneralmanagerDAO implements Igeneralmanager{
     @Override
     public Generalmanager getGeneralmanagerByNumber(String emp_no) {
         Generalmanager rtu = null;
-
         if(emp_no == null){
             return null;
         }

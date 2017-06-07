@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by zhoupan on 17-5-31.
  */
-public class CustomerDAO implements Icustomer {
+public class  CustomerDAO implements Icustomer {
     @Override
     public boolean insert(Customer customer) {
         return false;

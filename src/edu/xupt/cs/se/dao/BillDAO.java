@@ -17,7 +17,32 @@ public class BillDAO implements Ibill {
 
     @Override
     public boolean insert(Bill bill) {
-        return false;
+        boolean rtu = false;
+        if (bill == null) {
+            return rtu;
+        }
+        //获取Connection
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement ps = null;
+        try {
+            String sql = "insert into bill(customer_id, ticket_id, emp_id, play_id, price, sale_time) VALUES (?,?,?,?,?,?)";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1,bill.getCustomer_id());
+            ps.setInt(2,bill.getTicket_id());
+            ps.setInt(3,bill.getEmp_id());
+            ps.setInt(4,bill.getPlay_id());
+            ps.setFloat(5,bill.getPrice());
+            ps.setString(6,bill.getSale_time());
+            ps.executeUpdate();
+            rtu = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(null, ps, conn);
+            return rtu;
+        }
     }
 
     @Override
@@ -53,6 +78,7 @@ public class BillDAO implements Ibill {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Bill bill = new Bill();
+                bill.setId(rs.getInt("id"));
                 bill.setCustomer_id(rs.getInt("customer_id"));
                 bill.setTicket_id(rs.getInt("ticket_id"));
                 bill.setEmp_id(rs.getInt("emp_id"));

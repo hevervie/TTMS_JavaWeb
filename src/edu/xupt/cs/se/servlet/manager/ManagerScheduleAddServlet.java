@@ -1,11 +1,7 @@
 package edu.xupt.cs.se.servlet.manager;
 
-import edu.xupt.cs.se.dao.PlayDAO;
-import edu.xupt.cs.se.dao.ScheduleDAO;
-import edu.xupt.cs.se.dao.StudioDAO;
-import edu.xupt.cs.se.model.Play;
-import edu.xupt.cs.se.model.Schedule;
-import edu.xupt.cs.se.model.Studio;
+import edu.xupt.cs.se.dao.*;
+import edu.xupt.cs.se.model.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by zhoupan on 17-6-1.
@@ -60,6 +57,31 @@ public class ManagerScheduleAddServlet extends HttpServlet {
             schedule.setTime(time);
             schedule.setStatus(0);
             if(scheduleDAO.insert(schedule)){
+                ArrayList<Schedule> sch = scheduleDAO.getScheduleByPlay(play_id);
+                Schedule s=null;
+                for(Schedule sc : sch){
+                    if(sc.getTime().equals(time)){
+                        s = sc;
+                    }
+                }
+
+                SeatDAO seatDAO = new SeatDAO();
+                ArrayList<Seat> seats = seatDAO.getSeatByStudio(schedule.getStudio_id());
+                TicketDAO ticketDAO = new TicketDAO();
+                for(Seat seat : seats){
+                    Ticket ticket = new Ticket();
+                    ticket.setSeat_id(seat.getId());
+                    if(null != s) {
+                        ticket.setSchedule_id(s.getId());
+                    }else{
+                        ticket.setSchedule_id(0);
+                    }
+                    ticket.setPlay_id(play_id);
+                    ticket.setPrice(schedule.getPrice());
+                    ticket.setStatus(0);
+                    ticket.setLocktime("now");
+                    ticketDAO.insert(ticket);
+                }
                 response.sendRedirect("/managers/schedule/");
             }else{
                 request.setAttribute("message", "插入失败！");

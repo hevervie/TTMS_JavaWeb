@@ -1,12 +1,7 @@
 package edu.xupt.cs.se.servlet.manager;
 
-import edu.xupt.cs.se.dao.PlayDAO;
-import edu.xupt.cs.se.dao.ScheduleDAO;
-import edu.xupt.cs.se.dao.StudioDAO;
-import edu.xupt.cs.se.model.Manager;
-import edu.xupt.cs.se.model.Play;
-import edu.xupt.cs.se.model.Schedule;
-import edu.xupt.cs.se.model.Studio;
+import edu.xupt.cs.se.dao.*;
+import edu.xupt.cs.se.model.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,6 +41,11 @@ public class ManagerScheduleServlet extends HttpServlet {
             }
 
             if(scheduleDAO.delete(id)){
+                TicketDAO ticketDAO = new TicketDAO();
+                ArrayList<Ticket> tickets = ticketDAO.getTicketBySchedule(id);
+                for(Ticket ticket : tickets){
+                    ticketDAO.delete(ticket.getId());
+                }
                 response.sendRedirect("/managers/schedule/");
             }else {
                 request.setAttribute("message","删除失败！");

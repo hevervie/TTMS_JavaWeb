@@ -78,7 +78,40 @@ public class ScheduleDAO implements Ischedule {
 
     @Override
     public Schedule getScheduleByID(int schedule_id) {
-        return null;
+        Schedule rtu = null;
+
+        if (schedule_id <= 0) {
+            return rtu;
+        }
+        //获取Connection
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "select *  from schedule where id=?;";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, schedule_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                rtu = new Schedule();
+                rtu.setId(rs.getInt("id"));
+                rtu.setStudio_id(rs.getInt("studio_id"));
+                rtu.setPlay_id(rs.getInt("play_id"));
+                rtu.setTime(rs.getString("time"));
+                rtu.setDiscount(rs.getFloat("discount"));
+                rtu.setPrice(rs.getFloat("price"));
+                rtu.setStatus(rs.getInt("status"));
+            }
+            return rtu;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(null, ps, conn);
+            return rtu;
+        }
     }
 
     @Override
@@ -120,12 +153,63 @@ public class ScheduleDAO implements Ischedule {
 
     @Override
     public ArrayList<Schedule> getScheduleByPlay(int play_id) {
-        return null;
+        ArrayList<Schedule> list = new ArrayList<>();
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select * from schedule where play_id = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, play_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Schedule schedule = new Schedule();
+                schedule.setId(rs.getInt("id"));
+                schedule.setStudio_id(rs.getInt("studio_id"));
+                schedule.setPlay_id(rs.getInt("play_id"));
+                schedule.setTime(rs.getString("time"));
+                schedule.setDiscount(rs.getFloat("discount"));
+                schedule.setPrice(rs.getFloat("price"));
+                schedule.setStatus(rs.getInt("status"));
+                list.add(schedule);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(rs, ps, conn);
+            return list;
+        }
     }
 
     @Override
     public ArrayList<Schedule> getAllSchedule() {
-        return null;
+        ArrayList<Schedule> list = new ArrayList<>();
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select * from schedule";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Schedule schedule = new Schedule();
+                schedule.setId(rs.getInt("id"));
+                schedule.setStudio_id(rs.getInt("studio_id"));
+                schedule.setPlay_id(rs.getInt("play_id"));
+                schedule.setTime(rs.getString("time"));
+                schedule.setDiscount(rs.getFloat("discount"));
+                schedule.setPrice(rs.getFloat("price"));
+                schedule.setStatus(rs.getInt("status"));
+                list.add(schedule);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(rs, ps, conn);
+            return list;
+        }
     }
 
     @Override

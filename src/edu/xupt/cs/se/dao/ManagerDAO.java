@@ -99,7 +99,7 @@ public class ManagerDAO implements Imanager {
         try {
             //INSERT into manager VALUES (1,'20000001',1,'Box','123456');
 
-            String sql = "delete from employee where id=?;";
+            String sql = "delete from manager where id=?;";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, manager_id);
             ps.executeUpdate();
@@ -156,7 +156,7 @@ public class ManagerDAO implements Imanager {
         ResultSet rs = null;
         try {
             //insert into manager(emp_no,theater_id,name,passwd ) VALUES (?,?,?,?,?)
-            String sql = "select id,emp_no,theater_id,name,passwd from employee where id =?";
+            String sql = "select id,emp_no,theater_id,name,passwd from manager where id =?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, manager_id);
             rs = ps.executeQuery();

@@ -1,6 +1,8 @@
 package edu.xupt.cs.se.servlet.manager;
 
+import edu.xupt.cs.se.dao.SeatDAO;
 import edu.xupt.cs.se.dao.StudioDAO;
+import edu.xupt.cs.se.model.Seat;
 import edu.xupt.cs.se.model.Studio;
 
 import javax.servlet.ServletException;
@@ -38,6 +40,13 @@ public class ManagerStudioServlet extends HttpServlet {
             }
             System.out.println("id = " + id);
             if (studioDAO.delete(id)) {
+                SeatDAO seatDAO = new SeatDAO();
+                ArrayList<Seat> seats = seatDAO.getSeatByStudio(id);
+                for(Seat seat : seats){
+                    seatDAO.delete(seat.getId());
+                }
+
+
                 //删除成功
                 response.sendRedirect("/managers/studio/");
             } else {

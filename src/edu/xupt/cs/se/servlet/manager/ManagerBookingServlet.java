@@ -107,6 +107,9 @@ public class ManagerBookingServlet extends HttpServlet {
     }
 
     private boolean isConstain(ArrayList<Employee> list, Employee obj) {
+        if(list == null || obj == null){
+            return false;
+        }
         for (Employee employee : list) {
             if (employee.getEmp_no().equals(obj.getEmp_no())) {
                 return true;

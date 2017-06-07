@@ -74,7 +74,38 @@ public class SeatDAO implements Iseat {
 
     @Override
     public Seat getSeatByID(int seat_id) {
-        return null;
+        Seat rtu = null;
+
+        if (seat_id <= 0) {
+            return rtu;
+        }
+        //获取Connection
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "select *  from seat where id = ?;";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, seat_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                rtu = new Seat();
+                rtu.setId(rs.getInt("id"));
+                rtu.setRow(rs.getInt("row"));
+                rtu.setCol(rs.getInt("col"));
+                rtu.setStatus(rs.getInt("status"));
+                rtu.setStudio_id(rs.getInt("studio_id"));
+            }
+            return rtu;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(null, ps, conn);
+            return rtu;
+        }
     }
 
     @Override
@@ -84,7 +115,39 @@ public class SeatDAO implements Iseat {
 
     @Override
     public Seat getSeatByRowCol(int row, int col) {
-        return null;
+        Seat rtu = null;
+
+        if (row <= 0 || col <= 0) {
+            return rtu;
+        }
+        //获取Connection
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "select *  from seat where row=? and col = ?;";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, row);
+            ps.setInt(2,col);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                rtu = new Seat();
+                rtu.setId(rs.getInt("id"));
+                rtu.setRow(rs.getInt("row"));
+                rtu.setCol(rs.getInt("col"));
+                rtu.setStatus(rs.getInt("status"));
+                rtu.setStudio_id(rs.getInt("studio_id"));
+            }
+            return rtu;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(null, ps, conn);
+            return rtu;
+        }
     }
 
     @Override

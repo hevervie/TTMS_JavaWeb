@@ -8,6 +8,35 @@ public class Ticket {
     private int seat_id;
     private int schedule_id;
     private int play_id;
+
+    public int getSchedule_id() {
+        return schedule_id;
+    }
+
+    public void setSchedule_id(int schedule_id) {
+        this.schedule_id = schedule_id;
+    }
+
+    public int getPlay_id() {
+        return play_id;
+    }
+
+    public void setPlay_id(int play_id) {
+        this.play_id = play_id;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
     private float price;
     private int status;
     private String locktime;

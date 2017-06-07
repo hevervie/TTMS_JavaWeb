@@ -13,7 +13,7 @@ import java.io.IOException;
 @WebServlet(name = "EmployeeIndexServlet")
 public class EmployeeIndexServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.getRequestDispatcher("/employee/index.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

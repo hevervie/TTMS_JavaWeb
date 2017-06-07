@@ -13,7 +13,7 @@ import java.io.IOException;
 @WebServlet(name = "LogoutServlet", urlPatterns = "/logout")
 public class LogoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getSession().setAttribute("username", null);
+        request.getSession().setAttribute("userid", null);
         request.getSession().setAttribute("login", null);
         request.getSession().setAttribute("actor", null);
         response.sendRedirect("/");

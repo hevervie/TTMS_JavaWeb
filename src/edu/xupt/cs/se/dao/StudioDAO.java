@@ -163,7 +163,7 @@ public class StudioDAO implements Istudio {
             String sql = "select *  from studio where name=? and theater_id = ?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, studio_name);
-            ps.setInt(1, theater_id);
+            ps.setInt(2, theater_id);
             rs = ps.executeQuery();
             while (rs.next()) {
                 rtu = new Studio();
