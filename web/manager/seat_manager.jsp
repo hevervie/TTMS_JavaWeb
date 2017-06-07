@@ -200,10 +200,6 @@
                                 <td style="width: 15%;"><%=seats.get(i).getCol()%></td>
                                 <td style="width: 15%;"><%=seats.get(i).getStatus()%></td>
                                 <td>
-                                    <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-edit"></i>
-                                    </button>
                                     <a href="/managers/seat/?type=delete&id=<%=seats.get(i).getId()%>"><button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>
                                     </button></a>
                                 </td>

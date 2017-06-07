@@ -255,7 +255,7 @@
                                 </td>
                                 <td style="width: 30%;"><%=bills.get(i).getPlay_id()%>
                                 </td>
-                                <td style="width: 15%;"><%=bills.get(i).getTicket_id()%>
+                                <td style="width: 15%;"><%=bills.get(i).getPrice()%>
                                 </td>
                                 <td><%=bills.get(i).getSale_time()%>
                                 </td>

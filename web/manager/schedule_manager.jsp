@@ -175,10 +175,6 @@
                                 <td style="width: 5%;"><%=schedules.get(i).getPrice()%></td>
                                 <td style="width: 10%;"><%=schedules.get(i).getStatus()%></td>
                                 <td>
-                                    <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-edit"></i>
-                                    </button>
                                     <a href="/managers/schedule/?type=delete&id=<%=schedules.get(i).getId()%>"><button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>
                                     </button></a>
                                 </td>

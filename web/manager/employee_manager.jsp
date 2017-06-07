@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="edu.xupt.cs.se.model.Employee" %><%--
   Created by IntelliJ IDEA.
   User: zhoupan
   Date: 17-6-1
@@ -138,79 +139,25 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <%
+                                ArrayList<Employee> employees = (ArrayList<Employee>) request.getAttribute("employees");
+                                for(int i=0;i<employees.size();i++){
+                            %>
                             <tr>
-                                <td style="width: 70px;">1</td>
-                                <td style="width: 15%;">Ravi Kumar</td>
-                                <td style="width: 15%;">India</td>
-                                <td style="width: 15%;">23/12/2012</td>
-                                <td style="width: 15%;">Paid</td>
+                                <td style="width: 70px;"><%=i+1%></td>
+                                <td style="width: 15%;"><%=employees.get(i).getEmp_no()%></td>
+                                <td style="width: 15%;"><%=employees.get(i).getTheater_id()%></td>
+                                <td style="width: 15%;"><%=employees.get(i).getName()%></td>
+                                <td style="width: 15%;"><%=employees.get(i).getTel()%></td>
                                 <td>
-                                    <button class="btn btn-xs btn-success"> <i class="glyphicon glyphicon-ok"></i> </button>
-                                    <button class="btn btn-xs btn-warning"> <i class="glyphicon glyphicon-edit"></i> </button>
-                                    <button class="btn btn-xs btn-danger"> <i class="glyphicon glyphicon-remove"></i> </button>
+                                    <a href="/managers/employee/?type=delete&id=<%=employees.get(i).getId()%>"><button class="btn btn-xs btn-danger" title="删除"> <i class="glyphicon glyphicon-remove"></i> </button></a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="width: 70px;">2</td>
-                                <td style="width: 15%;">Ravi Kumar</td>
-                                <td style="width: 15%;">India</td>
-                                <td style="width: 15%;">23/12/2012</td>
-                                <td style="width: 15%;">Paid</td>
-                                <td>
-                                    <button class="btn btn-xs btn-success"> <i class="glyphicon glyphicon-ok"></i> </button>
-                                    <button class="btn btn-xs btn-warning"> <i class="glyphicon glyphicon-edit"></i> </button>
-                                    <button class="btn btn-xs btn-danger"> <i class="glyphicon glyphicon-remove"></i> </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 70px;">3</td>
-                                <td style="width: 15%;">Ravi Kumar</td>
-                                <td style="width: 15%;">India</td>
-                                <td style="width: 15%;">23/12/2012</td>
-                                <td style="width: 15%;">Paid</td>
-                                <td>
-                                    <button class="btn btn-xs btn-success"> <i class="glyphicon glyphicon-ok"></i> </button>
-                                    <button class="btn btn-xs btn-warning"> <i class="glyphicon glyphicon-edit"></i> </button>
-                                    <button class="btn btn-xs btn-danger"> <i class="glyphicon glyphicon-remove"></i> </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 70px;">4</td>
-                                <td style="width: 15%;">Ravi Kumar</td>
-                                <td style="width: 15%;">India</td>
-                                <td style="width: 15%;">23/12/2012</td>
-                                <td style="width: 15%;">Paid</td>
-                                <td>
-                                    <button class="btn btn-xs btn-success"> <i class="glyphicon glyphicon-ok"></i> </button>
-                                    <button class="btn btn-xs btn-warning"> <i class="glyphicon glyphicon-edit"></i> </button>
-                                    <button class="btn btn-xs btn-danger"> <i class="glyphicon glyphicon-remove"></i> </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 70px;">5</td>
-                                <td style="width: 15%;">Ravi Kumar</td>
-                                <td style="width: 15%;">India</td>
-                                <td style="width: 15%;">23/12/2012</td>
-                                <td style="width: 15%;">Paid</td>
-                                <td>
-                                    <button class="btn btn-xs btn-success"> <i class="glyphicon glyphicon-ok"></i> </button>
-                                    <button class="btn btn-xs btn-warning"> <i class="glyphicon glyphicon-edit"></i> </button>
-                                    <button class="btn btn-xs btn-danger"> <i class="glyphicon glyphicon-remove"></i> </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 70px;">6</td>
-                                <td style="width: 15%;">Ravi Kumar</td>
-                                <td style="width: 15%;">India</td>
-                                <td style="width: 15%;">23/12/2012</td>
-                                <td style="width: 15%;">Paid</td>
-                                <td>
-                                    <button class="btn btn-xs btn-success"> <i class="glyphicon glyphicon-ok"></i> </button>
-                                    <button class="btn btn-xs btn-warning"> <i class="glyphicon glyphicon-edit"></i> </button>
-                                    <button class="btn btn-xs btn-danger"> <i class="glyphicon glyphicon-remove"></i> </button>
-                                </td>
-                            </tr>
+                            <%
+                                }
+                            %>
                             </tbody>
+
                         </table>
                     </div>
                 </div>
@@ -234,39 +181,6 @@
             })
         });
     })
-</script>
-<script>
-    $(function(){
-        function renderTpl(str, cfg) {
-            var re = /(#(.+?)#)/g;
-
-            return str.replace(re, function() {
-                var val = cfg[arguments[2]]+'';
-                if(typeof val == 'undefined') {
-                    val = '';
-                }
-                return val;
-            });
-        }
-
-        // 异步请求后台数据
-        $.ajax({
-            url: 'https://o.qcloud.com/static_api/v3/components/table7/data.json',
-            type: 'GET',
-            success: function(res){
-                var _html = ' ';
-                var list = res.items;
-                var tpl = $('#tpl_14962207285852').html();
-                var headerTpl =  $('#header_tpl_14962207285852').html();
-                for (var i=0,len=list.length; i < len; i++){
-                    var item = list[i];
-                    _html += renderTpl(tpl, item)
-                }
-                $('.ranger-box2 tbody').html(_html);
-                $('.ranger-box2 thead').html(renderTpl(headerTpl,res.catalogues));
-            }
-        });
-    });
 </script>
 </body>
 

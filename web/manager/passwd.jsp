@@ -129,32 +129,41 @@
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <div class="col-md-6">
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" action="/managers/passwd/" method="post">
                                         <div class="form-group clearfix ">
                                             <label class="col-sm-3 control-label bk-lh30 pt0">原始密码：</label>
                                             <div class="col-sm-9">
-                                                <input type="password" class="form-control bk-valign-top" id="" placeholder="请输入密码">
+                                                <input type="password" name="old" class="form-control bk-valign-top" placeholder="请输入密码">
                                                 <p class="help-block"></p>
                                             </div>
                                         </div>
                                         <div class="form-group clearfix ">
                                             <label class="col-sm-3 control-label bk-lh30 pt0">新密码：</label>
                                             <div class="col-sm-9">
-                                                <input type="password" class="form-control bk-valign-top" id="" placeholder="请输入密码">
+                                                <input type="password" name="new" class="form-control bk-valign-top" placeholder="请输入密码">
                                                 <p class="help-block"></p>
                                             </div>
                                         </div>
                                         <div class="form-group clearfix ">
                                             <label class="col-sm-3 control-label bk-lh30 pt0">密码确认：</label>
                                             <div class="col-sm-9">
-                                                <input type="password" class="form-control bk-valign-top" id="" placeholder="请输入密码">
+                                                <input type="password" name="repeat" class="form-control bk-valign-top" placeholder="请输入密码">
                                                 <p class="help-block"></p>
                                             </div>
                                         </div>
                                         <div class="form-group clearfix">
                                             <div class="col-sm-9 col-sm-offset-3">
-                                                <button type="button" class="king-btn mr10  king-success">提交</button>
+                                                <button type="submit" class="king-btn mr10  king-success">提交</button>
                                                 <a href="/managers/"><button type="button" class="king-btn king-default ">取消</button></a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <div class="col-sm-9 col-sm-offset-3" style="color: red">
+                                                <%
+                                                    if (null != request.getAttribute("message")) {
+                                                        out.println(request.getAttribute("message"));
+                                                    }
+                                                %>
                                             </div>
                                         </div>
                                     </form>

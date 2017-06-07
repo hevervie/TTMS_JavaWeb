@@ -10,7 +10,7 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
@@ -18,8 +18,10 @@
     <!-- Bootstrap css -->
     <link href="https://o.qcloud.com/static_api/v3/assets/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <!-- kendo ui css -->
-    <link href="https://o.qcloud.com/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.common.min.css" rel="stylesheet">
-    <link href="https://o.qcloud.com/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.default.min.css" rel="stylesheet">
+    <link href="https://o.qcloud.com/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.common.min.css"
+          rel="stylesheet">
+    <link href="https://o.qcloud.com/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.default.min.css"
+          rel="stylesheet">
     <!-- font-awesome -->
     <link href="https://o.qcloud.com/static_api/v3/assets/fontawesome/css/font-awesome.css" rel="stylesheet">
     <!--蓝鲸提供的公用样式库 -->
@@ -35,7 +37,9 @@
     <!-- 数据埋点统计 -->
     <script src="https://o.qcloud.com/static_api/analysis.js"></script>
     <!-- 以下两个插件用于在IE8以及以下版本浏览器支持HTML5元素和媒体查询，如果不需要用可以移除 -->
-    <!--[if lt IE 9]><script src="https://o.qcloud.com/static_api/v3/assets/js/html5shiv.min.js"></script><script src="https://o.qcloud.com/static_api/v3/assets/js/respond.min.js"></script><![endif]-->
+    <!--[if lt IE 9]>
+    <script src="https://o.qcloud.com/static_api/v3/assets/js/html5shiv.min.js"></script>
+    <script src="https://o.qcloud.com/static_api/v3/assets/js/respond.min.js"></script><![endif]-->
 </head>
 
 <body class="bg-white" data-bg-color="bg-white">
@@ -46,14 +50,16 @@
                 <div class="nav-container">
                     <div class="navbar-header">
                         <button class="pull-right visible-xs navbar-toggle collapsed navbar-toggle-sm" type="button"
-                                data-toggle="collapse" data-target="#king-header2-navbar-collapse"><i class="fa fa-fw fa-ellipsis-v"> </i></button>
+                                data-toggle="collapse" data-target="#king-header2-navbar-collapse"><i
+                                class="fa fa-fw fa-ellipsis-v"> </i></button>
                         <a class="navbar-brand" href="/managers/"><span style="font-size: 24px">光影人生</span>-影院票务管理系统</a>
                     </div>
                     <div class="navbar-collapse collapse" id="king-header2-navbar-collapse">
                         <ul class="nav navbar-nav navbar-left hidden-sm"></ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> admin <b class="caret"></b></a>
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i
+                                        class="fa fa-user"></i> admin <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="javascript:;"><i class="fa fa-fw fa-user"></i> 用户</a>
@@ -78,27 +84,35 @@
                     <div class="sidebar-inner">
                         <ul class="navi">
                             <li class="has_submenu current open active c-open">
-                                <a href="javascript:void(0);"> <i class="fa fa-gear ">                        </i>
+                                <a href="javascript:void(0);"> <i class="fa fa-gear "> </i>
                                     <span>常用操作</span>
                                     <span class="pull-right"><i class="fa fa-angle-down"></i></span>
                                 </a>
                                 <ul class="sub-menu" style="display: block;">
-                                    <li><a href="/managers/studio/">影厅管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/movie/">影片管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/seat/">座位管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/schedule/">演出计划管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/finance/">财务管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/booking/">票房管理<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/managers/studio/">影厅管理<i
+                                            class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/managers/movie/">影片管理<i
+                                            class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/managers/seat/">座位管理<i class="fa fa-chevron-right pull-right"></i></a>
+                                    </li>
+                                    <li><a href="/managers/schedule/">演出计划管理<i
+                                            class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/managers/finance/">财务管理<i class="fa fa-chevron-right pull-right"></i></a>
+                                    </li>
+                                    <li><a href="/managers/booking/">票房管理<i class="fa fa-chevron-right pull-right"></i></a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="has_submenu current open active c-open">
-                                <a href="javascript:void(0);"> <i class="fa fa-wrench ">                        </i>
+                                <a href="javascript:void(0);"> <i class="fa fa-wrench "> </i>
                                     <span>系统管理</span>
                                     <span class="pull-right"><i class="fa fa-angle-down"></i></span>
                                 </a>
                                 <ul class="sub-menu" style="display: block;">
-                                    <li><a href="/managers/employee/">人事管理<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="/managers/passwd/">密码修改<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/managers/employee/">人事管理<i class="fa fa-chevron-right pull-right"></i></a>
+                                    </li>
+                                    <li><a href="/managers/passwd/">密码修改<i
+                                            class="fa fa-chevron-right pull-right"></i></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -130,35 +144,49 @@
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <div class="col-md-6">
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" method="post" action="/managers/employee/add/">
                                         <div class="form-group clearfix ">
                                             <label class="col-sm-3 control-label bk-lh30 pt0">工号：</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control bk-valign-top" id="" placeholder="请输入工号"> </div>
+                                                <input type="text" name="empno" class="form-control bk-valign-top"
+                                                       placeholder="请输入工号"></div>
                                         </div>
                                         <div class="form-group clearfix ">
                                             <label class="col-sm-3 control-label bk-lh30 pt0">姓名：</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control bk-valign-top" id="" placeholder="请输入姓名"> </div>
+                                                <input type="text" name="name" class="form-control bk-valign-top"
+                                                       placeholder="请输入姓名"></div>
                                         </div>
                                         <div class="form-group clearfix ">
                                             <label class="col-sm-3 control-label bk-lh30 pt0">登录密码：</label>
                                             <div class="col-sm-9">
-                                                <input type="password" class="form-control bk-valign-top" id="" placeholder="请输入密码">
+                                                <input type="password" name="passwd" class="form-control bk-valign-top"
+                                                       placeholder="请输入密码">
                                                 <p class="help-block"></p>
                                             </div>
                                         </div>
                                         <div class="form-group clearfix ">
                                             <label class="col-sm-3 control-label bk-lh30 pt0">手机号码：</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control bk-valign-top" id="" placeholder="提示信息"> </div>
+                                                <input type="text" name="tel" class="form-control bk-valign-top"
+                                                       placeholder="提示信息"></div>
                                         </div>
-                                    </form>
-                                    <form class="form-horizontal">
                                         <div class="form-group clearfix">
                                             <div class="col-sm-9 col-sm-offset-3">
-                                                <button type="button" class="king-btn mr10  king-success">提交</button>
-                                                <a href="/managers/employee/"><button type="button" class="king-btn king-default ">取消</button></a>
+                                                <button type="submit" class="king-btn mr10  king-success">提交</button>
+                                                <a href="/managers/employee/">
+                                                    <button type="button" class="king-btn king-default ">取消</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="form-group clearfix">
+                                            <div class="col-sm-9 col-sm-offset-3" style="color: red">
+                                                <%
+                                                    if (null != request.getAttribute("message")) {
+                                                        out.println(request.getAttribute("message"));
+                                                    }
+                                                %>
                                             </div>
                                         </div>
                                     </form>
@@ -174,14 +202,14 @@
     </div>
 </div>
 <script>
-    $(function(){
+    $(function () {
         var li = $('.navi li');
-        li.each(function(){
-            $(this).click(function(){
-                if( $(this).hasClass('c-open')){
+        li.each(function () {
+            $(this).click(function () {
+                if ($(this).hasClass('c-open')) {
                     $(this).find('ul').slideUp(350);
                     $(this).removeClass('c-open');
-                }else{
+                } else {
                     $(this).find('ul').slideDown(350);
                     $(this).addClass('c-open');
                 }

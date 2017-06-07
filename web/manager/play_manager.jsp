@@ -184,10 +184,6 @@
                                 <td style="width: 8%;"><%=play.getPrice()%></td>
                                 <td style="width: 8%;"><%=play.getStatus()%></td>
                                 <td>
-                                    <button class="btn btn-xs btn-success"><i class="glyphicon glyphicon-ok"></i>
-                                    </button>
-                                    <button class="btn btn-xs btn-warning"><i class="glyphicon glyphicon-edit"></i>
-                                    </button>
                                     <a href="/managers/movie/?type=delete&id=<%=play.getId()%>"><button class="btn btn-xs btn-danger" title="删除"><i class="glyphicon glyphicon-remove"></i>
                                     </button></a>
                                 </td>
