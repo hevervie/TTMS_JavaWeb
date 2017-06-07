@@ -23,7 +23,7 @@ import java.util.Set;
  * Created by Shinelon on 2017/6/5.
  */
 
-@WebServlet(name = "EmployeeSaleServlet", urlPatterns = "/employee/sale/")
+@WebServlet(name = "EmployeeSaleServlet", urlPatterns = "/employee/tickets")
 public class EmployeeSaleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ScheduleDAO scheduleDAO = new ScheduleDAO();

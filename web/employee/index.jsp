@@ -1,12 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Shinelon
-  Date: 2017/6/5
-  Time: 11:50
+  User: Administrator
+  Date: 2017/6/1
+  Time: 18:45
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -84,11 +83,11 @@
                                     <span class="pull-right"><i class="fa fa-angle-down"></i></span>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="/employee/sale/">售票<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="">退票<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="">影片查询<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="">演出计划查询<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="">统计<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/employee/tickets">售票<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/employee/refunds">退票<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/employee/videoQuery">影片查询<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/employee/play">演出计划查询<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/employee/statistics">统计<i class="fa fa-chevron-right pull-right"></i></a></li>
                                 </ul>
                             </li>
                             <li class="has_submenu current open c-open">
@@ -97,7 +96,7 @@
                                     <span class="pull-right"><i class="fa fa-angle-down"></i></span>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="javascript:void(0);">更改密码<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/employee/changePwd">更改密码<i class="fa fa-chevron-right pull-right"></i></a></li>
                                 </ul>
                             </li>
                         </ul>

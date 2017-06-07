@@ -101,12 +101,11 @@
                                     <span class="pull-right"><i class="fa fa-angle-down"></i></span>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="/employee/sale/">售票<i class="fa fa-chevron-right pull-right"></i></a>
-                                    </li>
-                                    <li><a href="">退票<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="">影片查询<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="">演出计划查询<i class="fa fa-chevron-right pull-right"></i></a></li>
-                                    <li><a href="">统计<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/employee/tickets">售票<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/employee/refunds">退票<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/employee/videoQuery">影片查询<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/employee/play">演出计划查询<i class="fa fa-chevron-right pull-right"></i></a></li>
+                                    <li><a href="/employee/statistics">统计<i class="fa fa-chevron-right pull-right"></i></a></li>
                                 </ul>
                             </li>
                             <li class="has_submenu current open c-open">
@@ -145,7 +144,7 @@
                     <div class="panel-body">
                         <div class="container-fluid m10 bg-white">
                             <div class="row">
-                                <form class="form-horizontal" method="post" action="/employee/sale/">
+                                <form class="form-horizontal" method="post" action="/employee/tickets">
                                     <div class="col-md-3">
 
                                         <div class="form-group clearfix ">
@@ -357,7 +356,7 @@
             })
         });
         $("#schedule").change(function () {
-            $.post("/employee/sale/",
+            $.post("/employee/tickets",
                 {
                     type: "getrc",
                     id: this.value
@@ -390,7 +389,7 @@
 <script type="text/javascript">
     //模态对话框
     $("#submit").click(function () {
-        $.post("/employee/sale/",
+        $.post("/employee/tickets",
             {
                 schedule: $("#schedule").val(),
                 row: $("#row").val(),
