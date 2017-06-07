@@ -354,7 +354,32 @@ public class EmployeeDAO implements Iemployee {
 
     @Override
     public ArrayList<Employee> getAllEmployee() {
-        return null;
+        ArrayList<Employee> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = ConnectionManager.getInstance().getConnection();
+            String sql = "select * from employee";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Employee employee = new Employee();
+                employee.setId(rs.getInt("id"));
+                employee.setEmp_no(rs.getString("emp_no"));
+                employee.setTheater_id(rs.getInt("theater_id"));
+                employee.setName(rs.getString("name"));
+                employee.setPasswd(rs.getString("passwd"));
+                employee.setTel(rs.getString("tel"));
+                // 将该用户信息插入列表
+                list.add(employee);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(rs, ps, conn);
+            return list;
+        }
     }
 
     public boolean check(String emp_no, String passwd){

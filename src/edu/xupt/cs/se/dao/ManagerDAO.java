@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by zhoupan on 17-5-31.
@@ -228,7 +229,30 @@ public class ManagerDAO implements Imanager {
 
     @Override
     public ArrayList<Manager> getAllManager() {
-        return null;
+        ArrayList<Manager> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = ConnectionManager.getInstance().getConnection();
+            String sql = "select * from manager";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Manager manager = new Manager();
+                manager.setId(rs.getInt("id"));
+                manager.setEmp_no(rs.getString("emp_no"));
+                manager.setTheater_id(rs.getInt("theater_id"));
+                manager.setName(rs.getString("name"));
+                manager.setPasswd(rs.getString("passwd"));
+                list.add(manager);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(rs, ps, conn);
+            return list;
+        }
     }
 
     @Override
@@ -237,7 +261,7 @@ public class ManagerDAO implements Imanager {
         if (null == emp_no) {
             return rtu;
         }
-        if(emp_no.equals("")){
+        if (emp_no.equals("")) {
             return rtu;
         }
         Connection conn = ConnectionManager.getInstance().getConnection();
@@ -268,8 +292,8 @@ public class ManagerDAO implements Imanager {
 
     @Override
     public ArrayList<Manager> getManagerByTheater(int theater_id) {
-        if(theater_id <= 0){
-            return  null;
+        if (theater_id <= 0) {
+            return null;
         }
         ArrayList<Manager> list = new ArrayList<>();
         Connection conn = ConnectionManager.getInstance().getConnection();
@@ -305,19 +329,19 @@ public class ManagerDAO implements Imanager {
         return null;
     }
 
-    public boolean check(String emp_no, String passwd){
-        if(null == emp_no || passwd == null){
+    public boolean check(String emp_no, String passwd) {
+        if (null == emp_no || passwd == null) {
             return false;
         }
-        if(emp_no.equals("") || passwd.equals("")){
+        if (emp_no.equals("") || passwd.equals("")) {
             return false;
         }
         Manager manager = getManagerByNumber(emp_no);
 
-        if(manager == null){
+        if (manager == null) {
             return false;
         }
-        if(manager.getPasswd().equals(passwd)){
+        if (manager.getPasswd().equals(passwd)) {
             return true;
         }
         return false;

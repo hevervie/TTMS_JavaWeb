@@ -2,7 +2,12 @@ package edu.xupt.cs.se.dao;
 
 import edu.xupt.cs.se.idao.Itheater;
 import edu.xupt.cs.se.model.Theater;
+import edu.xupt.cs.se.util.ConnectionManager;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -36,7 +41,30 @@ public class TheaterDAO implements Itheater {
 
     @Override
     public ArrayList<Theater> getAllTheater() {
-        return null;
+        ArrayList<Theater> list = new ArrayList<Theater>();
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+
+            String sql = "select * from theater";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Theater theater = new Theater();
+                theater.setId(rs.getInt("id"));
+                theater.setAddr(rs.getString("addr"));
+                theater.setName(rs.getString("name"));
+                theater.setStudio_number(rs.getInt("studio_number"));
+                list.add(theater);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionManager.close(rs, ps, conn);
+            return list;
+        }
     }
 
 
